@@ -1,0 +1,24 @@
+model: 'Active_contour'
+network: 'rcnn_34'
+task: 'IrisGazeSeg'
+resume: True
+gpus: [1]
+
+det_model: 'long_rcnn_det'
+
+train:
+    optim: 'adam'
+    lr: 1e-4
+    milestones: (80, 120, 150)
+    gamma: 0.5
+    batch_size: 4
+    dataset: 'CityscapesTrain'
+    num_workers: 13
+    epoch: 5000
+test:
+    dataset: 'CityscapesVal'
+    batch_size: 1
+
+heads: {'act_hm': 8, 'awh': 2}
+segm_or_bbox: 'segm'
+ct_score: 0.03
